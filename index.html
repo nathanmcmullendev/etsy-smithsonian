@@ -1450,12 +1450,21 @@
       console.log('🧹 Page initialized in clean state');
     }
 
-    // Initialize the application - NO AUTO-LOAD
+    // Initialize the application with Georgia O'Keeffe as default
     document.addEventListener('DOMContentLoaded', function() {
-      initializeCleanState(); // Start with clean state
+      initializeCleanState();
       initRouter();
-      // REMOVED: fetchArtworks(); // ← No auto-load!
-      console.log('🔥 Smithsonian store loaded - NO AUTO-LOAD for testing');
+      
+      // Set Georgia O'Keeffe as default artist
+      const artistSelect = document.getElementById('artistSelect');
+      const searchQuery = document.getElementById('searchQuery');
+      if (artistSelect) artistSelect.value = "Georgia O'Keeffe";
+      if (searchQuery) searchQuery.value = "Georgia O'Keeffe";
+      
+      // Load artwork on page load
+      fetchArtworks();
+      
+      console.log('🔥 Smithsonian store loaded with Georgia O\'Keeffe');
     });
 
     // Debug Snipcart events
