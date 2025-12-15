@@ -78,59 +78,118 @@
     
     /* ----------------------------------------
        SEARCH CONTROLS
-       - Search input, artist dropdown, max items
+       Museum Search Bar - Primary search experience
        ---------------------------------------- */
     .search-controls {
       display: flex;
-      gap: 15px;
-      align-items: flex-end;
+      gap: 12px;
+      align-items: center;
       flex-wrap: wrap;
       justify-content: center;
       flex: 1;
-      max-width: 800px;
+      max-width: 700px;
+    }
+    
+    /* Main Search Bar - The primary input */
+    .search-bar-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+      max-width: 400px;
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #757575;
+      pointer-events: none;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      border: 2px solid #e1e3df;
+      border-radius: 28px;
+      font-size: 15px;
+      outline: none;
+      background: #f8f9fa;
+      transition: all 0.2s ease;
+    }
+    
+    .search-input:focus {
+      border-color: #f1651f;
+      background: white;
+      box-shadow: 0 2px 8px rgba(241, 101, 31, 0.15);
+    }
+    
+    .search-input::placeholder {
+      color: #999;
+    }
+    
+    /* Secondary Controls Row */
+    .secondary-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
     
     .input-group {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      min-width: 120px;
+      align-items: flex-start;
     }
     
     .input-label {
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #222222;
+      margin-bottom: 4px;
+      font-weight: 500;
+      color: #757575;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Artist Quick Select Dropdown */
+    .artist-select {
+      padding: 10px 32px 10px 12px;
+      border: 1px solid #e1e3df;
+      border-radius: 20px;
       font-size: 13px;
-    }
-    
-    .search-input, .artist-select, .max-items-input {
-      padding: 10px 15px;
-      border: 2px solid #222222;
-      border-radius: 24px;
-      font-size: 14px;
       outline: none;
-      text-align: center;
+      cursor: pointer;
+      background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23757575' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      color: #222;
+      transition: all 0.2s ease;
     }
     
-    .search-input {
-      min-width: 250px;
-      text-align: left;
-      padding-left: 15px;
+    .artist-select:hover {
+      border-color: #999;
     }
     
-    .search-input:focus, .artist-select:focus, .max-items-input:focus {
+    .artist-select:focus {
       border-color: #f1651f;
     }
     
-    .artist-select {
-      min-width: 200px;
-      cursor: pointer;
+    /* Max Items Input */
+    .max-items-input {
+      width: 60px;
+      padding: 10px 8px;
+      border: 1px solid #e1e3df;
+      border-radius: 20px;
+      font-size: 13px;
+      outline: none;
+      text-align: center;
       background: white;
+      transition: all 0.2s ease;
     }
     
-    .max-items-input {
-      width: 80px;
+    .max-items-input:focus {
+      border-color: #f1651f;
     }
     
     /* ----------------------------------------
@@ -764,45 +823,145 @@
     /* ----------------------------------------
        RESPONSIVE DESIGN
        ---------------------------------------- */
+    
+    /* Tablet breakpoint */
+    @media (max-width: 900px) {
+      .header-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+      }
+      
+      .store-branding {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .search-controls {
+        order: 2;
+        width: 100%;
+        max-width: none;
+        justify-content: center;
+      }
+      
+      .cart-button {
+        order: 1;
+        position: absolute;
+        right: 24px;
+        top: 20px;
+      }
+    }
+    
+    /* Mobile breakpoint */
     @media (max-width: 768px) {
+      .store-header {
+        padding: 16px 0;
+      }
+      
       .header-container {
         flex-direction: column;
         text-align: center;
-        gap: 16px;
+        gap: 12px;
+        padding: 0 16px;
+      }
+      
+      .store-logo {
+        font-size: 28px;
+      }
+      
+      .store-tagline {
+        font-size: 12px;
+      }
+      
+      .cart-button {
+        position: static;
+        order: 3;
+        margin-top: 4px;
       }
       
       .search-controls {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
         width: 100%;
+        padding: 0 8px;
+      }
+      
+      .search-bar-wrapper {
+        width: 100%;
+        max-width: none;
+        min-width: auto;
+      }
+      
+      .search-input {
+        padding: 12px 12px 12px 40px;
+        font-size: 16px; /* Prevents iOS zoom */
+      }
+      
+      .secondary-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
       }
       
       .input-group {
-        width: 100%;
+        align-items: center;
       }
       
-      .search-input, .artist-select {
-        width: 100%;
-        max-width: 300px;
+      .artist-select {
+        font-size: 14px;
+        padding: 10px 28px 10px 12px;
       }
       
       .main-content {
         padding: 16px;
       }
       
+      /* Product Grid - 2 columns on mobile */
       .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
       
       .product-image-container {
-        height: 160px;
+        height: 180px;
       }
       
       .product-info {
         padding: 12px;
       }
       
+      .product-title {
+        font-size: 12px;
+      }
+      
+      .product-artist {
+        font-size: 11px;
+      }
+      
+      .product-pricing {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      
+      .current-price {
+        font-size: 14px;
+      }
+      
+      .original-price {
+        font-size: 12px;
+      }
+      
+      .discount {
+        font-size: 10px;
+      }
+      
+      .quick-add {
+        padding: 10px 8px;
+        font-size: 11px;
+      }
+      
+      /* Product Detail Page */
       .product-detail-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -822,6 +981,39 @@
       
       .detail-current-price {
         font-size: 24px;
+      }
+      
+      /* Status section */
+      .status-section {
+        padding: 12px 0;
+      }
+      
+      #status {
+        font-size: 13px;
+      }
+    }
+    
+    /* Small mobile */
+    @media (max-width: 400px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      
+      .product-image-container {
+        height: 150px;
+      }
+      
+      .product-info {
+        padding: 10px;
+      }
+      
+      .product-rating {
+        display: none;
+      }
+      
+      .discount {
+        display: none;
       }
     }
     
@@ -854,7 +1046,8 @@
   <!-- ----------------------------------------
        HEADER
        - Logo (click to go home)
-       - Search controls
+       - Museum Search Bar
+       - Quick filters (artist, max items)
        - Cart button (Snipcart trigger)
        ---------------------------------------- -->
   <header class="store-header">
@@ -865,42 +1058,49 @@
       </div>
       
       <div class="search-controls">
-        <div class="input-group">
-          <label class="input-label" for="searchQuery">Search Collection:</label>
-          <input type="text" class="search-input" id="searchQuery" placeholder="e.g. landscape, portrait, sculpture..." onkeypress="if(event.key==='Enter') fetchArtworks()" oninput="fetchArtworks()">
+        <!-- Primary Search Bar -->
+        <div class="search-bar-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="searchQuery" 
+                 placeholder="Search artworks, artists, styles..." 
+                 onkeypress="if(event.key==='Enter') fetchArtworks()" 
+                 oninput="fetchArtworks()">
         </div>
         
-        <div class="input-group">
-          <label class="input-label" for="artistSelect">Famous Artists:</label>
-          <select class="artist-select" id="artistSelect" onchange="fillSearchFromArtist()">
-            <option value="">-- Select Artist --</option>
-            <option value="Georgia O'Keeffe">Georgia O'Keeffe</option>
-            <option value="Edward Hopper">Edward Hopper</option>
-            <option value="Winslow Homer">Winslow Homer</option>
-            <option value="Mary Cassatt">Mary Cassatt</option>
-            <option value="John Singer Sargent">John Singer Sargent</option>
-            <option value="Jackson Pollock">Jackson Pollock</option>
-            <option value="Grant Wood">Grant Wood</option>
-            <option value="Norman Rockwell">Norman Rockwell</option>
-            <option value="Willem de Kooning">Willem de Kooning</option>
-            <option value="Jasper Johns">Jasper Johns</option>
-            <option value="Robert Rauschenberg">Robert Rauschenberg</option>
-            <option value="Andy Warhol">Andy Warhol</option>
-            <option value="Helen Frankenthaler">Helen Frankenthaler</option>
-            <option value="Mark Rothko">Mark Rothko</option>
-            <option value="Thomas Hart Benton">Thomas Hart Benton</option>
-            <option value="David Hockney">David Hockney</option>
-            <option value="Roy Lichtenstein">Roy Lichtenstein</option>
-            <option value="Jean-Michel Basquiat">Jean-Michel Basquiat</option>
-            <option value="Frederic Remington">Frederic Remington</option>
-            <option value="Thomas Cole">Thomas Cole</option>
-            <option value="clear">-- Clear Search --</option>
-          </select>
-        </div>
-        
-        <div class="input-group">
-          <label class="input-label" for="maxItems">Max Items:</label>
-          <input type="number" class="max-items-input" id="maxItems" value="20" min="1" max="50">
+        <!-- Secondary Controls -->
+        <div class="secondary-controls">
+          <div class="input-group">
+            <label class="input-label" for="artistSelect">Quick Select</label>
+            <select class="artist-select" id="artistSelect" onchange="fillSearchFromArtist()">
+              <option value="">Popular Artists</option>
+              <option value="Georgia O'Keeffe">Georgia O'Keeffe</option>
+              <option value="Edward Hopper">Edward Hopper</option>
+              <option value="Winslow Homer">Winslow Homer</option>
+              <option value="Mary Cassatt">Mary Cassatt</option>
+              <option value="John Singer Sargent">John Singer Sargent</option>
+              <option value="Jackson Pollock">Jackson Pollock</option>
+              <option value="Grant Wood">Grant Wood</option>
+              <option value="Norman Rockwell">Norman Rockwell</option>
+              <option value="Willem de Kooning">Willem de Kooning</option>
+              <option value="Jasper Johns">Jasper Johns</option>
+              <option value="Robert Rauschenberg">Robert Rauschenberg</option>
+              <option value="Andy Warhol">Andy Warhol</option>
+              <option value="Helen Frankenthaler">Helen Frankenthaler</option>
+              <option value="Mark Rothko">Mark Rothko</option>
+              <option value="Thomas Hart Benton">Thomas Hart Benton</option>
+              <option value="David Hockney">David Hockney</option>
+              <option value="Roy Lichtenstein">Roy Lichtenstein</option>
+              <option value="Jean-Michel Basquiat">Jean-Michel Basquiat</option>
+              <option value="Frederic Remington">Frederic Remington</option>
+              <option value="Thomas Cole">Thomas Cole</option>
+              <option value="clear">✕ Clear Search</option>
+            </select>
+          </div>
+          
+          <div class="input-group">
+            <label class="input-label" for="maxItems">Results</label>
+            <input type="number" class="max-items-input" id="maxItems" value="20" min="1" max="50">
+          </div>
         </div>
       </div>
       
@@ -1458,7 +1658,7 @@
     
     /**
      * Fill search input from artist dropdown selection
-     * Handles "clear" option to reset search
+     * Resets dropdown after selection (it's a quick-select helper)
      */
     function fillSearchFromArtist() {
       const artistSelect = document.getElementById("artistSelect");
@@ -1466,13 +1666,17 @@
       const selectedValue = artistSelect.value;
       
       if (selectedValue === "clear") {
+        // Clear the search
         searchQuery.value = "";
-        artistSelect.selectedIndex = 0;
       } else if (selectedValue) {
+        // Set the search to the selected artist
         searchQuery.value = selectedValue;
       }
       
-      // Auto-trigger search
+      // Reset dropdown to default (it's just a quick-select helper)
+      artistSelect.selectedIndex = 0;
+      
+      // Trigger search
       fetchArtworks();
     }
 
@@ -1752,16 +1956,14 @@
      * Main initialization on DOM ready
      * - Initialize clean state
      * - Set up router
-     * - Load Georgia O'Keeffe as default
+     * - Load Georgia O'Keeffe as default search
      */
     document.addEventListener('DOMContentLoaded', function() {
       initializeCleanState();
       initRouter();
       
-      // Set Georgia O'Keeffe as default artist
-      const artistSelect = document.getElementById('artistSelect');
+      // Set Georgia O'Keeffe as default search (but not in dropdown - it's a quick-select)
       const searchQuery = document.getElementById('searchQuery');
-      if (artistSelect) artistSelect.value = "Georgia O'Keeffe";
       if (searchQuery) searchQuery.value = "Georgia O'Keeffe";
       
       // Load artwork on page load
