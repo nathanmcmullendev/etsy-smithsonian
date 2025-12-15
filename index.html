@@ -10,7 +10,13 @@
   <link rel="preconnect" href="https://cdn.snipcart.com">
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.css" />
   
+  <!-- ============================================
+       CSS STYLES
+       ============================================ -->
   <style>
+    /* ----------------------------------------
+       RESET & BASE
+       ---------------------------------------- */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +30,11 @@
       line-height: 1.4;
     }
     
-    /* Header - MUCH lower z-index than Snipcart */
+    /* ----------------------------------------
+       HEADER
+       - Sticky header with logo, search, cart
+       - z-index: 1 (very low, below Snipcart)
+       ---------------------------------------- */
     .store-header {
       background: #ffffff;
       border-bottom: 1px solid #e1e3df;
@@ -66,6 +76,10 @@
       font-style: italic;
     }
     
+    /* ----------------------------------------
+       SEARCH CONTROLS
+       - Search input, artist dropdown, max items
+       ---------------------------------------- */
     .search-controls {
       display: flex;
       gap: 15px;
@@ -119,6 +133,9 @@
       width: 80px;
     }
     
+    /* ----------------------------------------
+       CART BUTTON
+       ---------------------------------------- */
     .cart-button {
       background: #f1651f;
       color: white;
@@ -153,7 +170,10 @@
       font-weight: bold;
     }
     
-    /* Navigation Breadcrumbs */
+    /* ----------------------------------------
+       BREADCRUMB NAVIGATION
+       - Shows on product page only
+       ---------------------------------------- */
     .breadcrumb-nav {
       background: #f8f9fa;
       padding: 12px 0;
@@ -176,7 +196,10 @@
       text-decoration: underline;
     }
     
-    /* Status and Stats */
+    /* ----------------------------------------
+       STATUS SECTION
+       - Shows loading state and result counts
+       ---------------------------------------- */
     .status-section {
       background: #f8f9fa;
       padding: 20px 0;
@@ -217,14 +240,20 @@
       color: #757575;
     }
     
-    /* Main Content */
+    /* ----------------------------------------
+       MAIN CONTENT CONTAINER
+       ---------------------------------------- */
     .main-content {
       max-width: 1400px;
       margin: 0 auto;
       padding: 24px;
     }
     
-    /* Shop Page - Product Grid */
+    /* ----------------------------------------
+       SHOP PAGE - PRODUCT GRID
+       - Grid of product cards
+       - Toggled via .hidden class
+       ---------------------------------------- */
     .shop-page {
       display: block;
     }
@@ -240,6 +269,11 @@
       margin-top: 20px;
     }
     
+    /* ----------------------------------------
+       PRODUCT CARD
+       - Individual card in the grid
+       - Clickable to open product page
+       ---------------------------------------- */
     .product-card {
       background: #ffffff;
       border-radius: 8px;
@@ -248,6 +282,16 @@
       cursor: pointer;
       position: relative;
       border: 1px solid #f0f0f0;
+      opacity: 0;
+      animation: fadeInUp 0.4s ease-out forwards;
+    }
+    
+    .product-card:nth-child(odd) {
+      animation-delay: 0.1s;
+    }
+    
+    .product-card:nth-child(even) {
+      animation-delay: 0.2s;
     }
     
     .product-card:hover {
@@ -393,7 +437,11 @@
       background: #000000;
     }
     
-    /* Single Product Page */
+    /* ----------------------------------------
+       SINGLE PRODUCT PAGE
+       - Detail view with image, options, cart
+       - Toggled via .active class
+       ---------------------------------------- */
     .product-page {
       display: none;
     }
@@ -485,6 +533,10 @@
       color: #757575;
     }
     
+    /* ----------------------------------------
+       PRODUCT OPTIONS
+       - Size and frame selection dropdowns
+       ---------------------------------------- */
     .product-options {
       margin-bottom: 24px;
     }
@@ -530,6 +582,11 @@
       color: #222222;
     }
     
+    /* ----------------------------------------
+       ADD TO CART BUTTON
+       - Becomes active when options selected
+       - Gets snipcart-add-item class dynamically
+       ---------------------------------------- */
     .add-to-cart-btn {
       width: 100%;
       background: #222222;
@@ -565,7 +622,10 @@
       color: #222222;
     }
     
-    /* Details Dropdown */
+    /* ----------------------------------------
+       ITEM DETAILS DROPDOWN
+       - Expandable section with artwork metadata
+       ---------------------------------------- */
     .details-section {
       margin-top: 24px;
     }
@@ -609,7 +669,11 @@
       font-weight: 600;
     }
     
-    /* Image Lightbox (Simple) */
+    /* ----------------------------------------
+       IMAGE LIGHTBOX
+       - Full-screen image viewer
+       - z-index: 999999 (high, but below Snipcart)
+       ---------------------------------------- */
     .image-lightbox {
       display: none;
       position: fixed;
@@ -651,7 +715,10 @@
       transform: scale(1.1);
     }
     
-    /* Empty State */
+    /* ----------------------------------------
+       EMPTY STATE
+       - Shown when no results found
+       ---------------------------------------- */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -664,7 +731,9 @@
       font-weight: 400;
     }
     
-    /* Footer */
+    /* ----------------------------------------
+       FOOTER
+       ---------------------------------------- */
     .professional-footer {
       background: #f8f9fa;
       text-align: center;
@@ -692,7 +761,9 @@
       margin-bottom: 8px;
     }
     
-    /* Responsive Design */
+    /* ----------------------------------------
+       RESPONSIVE DESIGN
+       ---------------------------------------- */
     @media (max-width: 768px) {
       .header-container {
         flex-direction: column;
@@ -754,23 +825,12 @@
       }
     }
     
+    /* ----------------------------------------
+       ANIMATIONS
+       ---------------------------------------- */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
-    }
-    
-    /* Loading animation for product cards */
-    .product-card {
-      opacity: 0;
-      animation: fadeInUp 0.4s ease-out forwards;
-    }
-    
-    .product-card:nth-child(odd) {
-      animation-delay: 0.1s;
-    }
-    
-    .product-card:nth-child(even) {
-      animation-delay: 0.2s;
     }
     
     @keyframes fadeInUp {
@@ -786,7 +846,17 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- ============================================
+       HTML STRUCTURE
+       ============================================ -->
+
+  <!-- ----------------------------------------
+       HEADER
+       - Logo (click to go home)
+       - Search controls
+       - Cart button (Snipcart trigger)
+       ---------------------------------------- -->
   <header class="store-header">
     <div class="header-container">
       <div class="store-branding">
@@ -834,7 +904,7 @@
         </div>
       </div>
       
-      <!-- CART BUTTON - STARTS CLEAN -->
+      <!-- Cart Button - Opens Snipcart slide-out -->
       <button type="button" class="cart-button snipcart-checkout">
         🛒 Cart
         <span class="cart-count snipcart-items-count">0</span>
@@ -842,14 +912,22 @@
     </div>
   </header>
 
-  <!-- Breadcrumb Navigation -->
+  <!-- ----------------------------------------
+       BREADCRUMB NAVIGATION
+       - Hidden by default
+       - Shown on product page
+       ---------------------------------------- -->
   <nav class="breadcrumb-nav" id="breadcrumbNav" style="display: none;">
     <div class="breadcrumb-container">
       <span id="breadcrumbContent"></span>
     </div>
   </nav>
 
-  <!-- Status Section -->
+  <!-- ----------------------------------------
+       STATUS SECTION
+       - Shows loading spinner
+       - Shows result count after load
+       ---------------------------------------- -->
   <section class="status-section">
     <div class="status-container">
       <div id="status">Loading featured artworks...</div>
@@ -859,9 +937,14 @@
     </div>
   </section>
 
-  <!-- Main Content -->
+  <!-- ----------------------------------------
+       MAIN CONTENT
+       Contains both shop page and product page
+       Only one is visible at a time
+       ---------------------------------------- -->
   <main class="main-content">
-    <!-- Shop Page -->
+    
+    <!-- SHOP PAGE - Product Grid -->
     <div class="shop-page" id="shopPage">
       <div class="products-grid" id="gallery">
         <div class="empty-state">
@@ -872,13 +955,15 @@
       </div>
     </div>
 
-    <!-- Single Product Page - STARTS HIDDEN -->
+    <!-- PRODUCT PAGE - Single Product Detail View -->
     <div class="product-page" id="productPage">
       <div class="product-detail-grid">
+        <!-- Left: Product Image -->
         <div class="product-gallery">
           <img id="mainProductImage" class="main-product-image" src="" alt="" onclick="openImageLightbox()">
         </div>
         
+        <!-- Right: Product Details & Options -->
         <div class="product-details">
           <div class="detail-breadcrumb" id="detailBreadcrumb"></div>
           
@@ -895,6 +980,7 @@
             <p class="price-note">Museum quality prints professionally produced on archival paper</p>
           </div>
           
+          <!-- Product Options -->
           <div class="product-options">
             <div class="option-group">
               <label class="option-label" for="sizeSelect">Size</label>
@@ -917,11 +1003,13 @@
             </div>
           </div>
           
+          <!-- Dynamic Price Display -->
           <div class="price-display" id="priceDisplay" style="display: none;">
             <div class="total-price" id="totalPrice">$0.00</div>
           </div>
           
-          <!-- ADD TO CART BUTTON - STARTS CLEAN -->
+          <!-- Add to Cart Button -->
+          <!-- NOTE: snipcart-add-item class is added dynamically when options are selected -->
           <button type="button" class="add-to-cart-btn" id="productAddToCartBtn" disabled>
             Select options above
           </button>
@@ -932,6 +1020,7 @@
             <p>Arrives in 3-5 business days</p>
           </div>
           
+          <!-- Expandable Item Details -->
           <div class="details-section">
             <button class="details-toggle" onclick="toggleDetails()">
               Item Details
@@ -946,13 +1035,19 @@
     </div>
   </main>
 
-  <!-- Simple Image Lightbox -->
+  <!-- ----------------------------------------
+       IMAGE LIGHTBOX
+       - Full-screen image viewer
+       - Activated by clicking product image
+       ---------------------------------------- -->
   <div class="image-lightbox" id="imageLightbox" onclick="closeImageLightbox(event)">
     <span class="lightbox-close" onclick="closeImageLightbox()">&times;</span>
     <img class="lightbox-image" id="lightboxImage" src="" alt="">
   </div>
 
-  <!-- Footer -->
+  <!-- ----------------------------------------
+       FOOTER
+       ---------------------------------------- -->
   <footer class="professional-footer">
     <div class="footer-content">
       <h3 class="footer-title">Museum Quality Art Prints</h3>
@@ -961,7 +1056,11 @@
     </div>
   </footer>
 
-  <!-- 🔥 SNIPCART CONFIGURATION - PROPERLY CONFIGURED WITH YOUR API KEY -->
+  <!-- ============================================
+       SNIPCART CONFIGURATION
+       - data-api-key: Your Snipcart public API key
+       - data-config-modal-style: "side" = slide-out cart
+       ============================================ -->
   <div hidden id="snipcart" 
        data-api-key="YTNhNTA0OWQtMjQ4NS00MTg0LWI0NjYtNTdiNTM5NmYxOTE1NjM4ODgyMjg4ODE0ODkwMzUw" 
        data-config-modal-style="side"
@@ -969,22 +1068,94 @@
   </div>
   <script async src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js"></script>
 
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
   <script>
+    // ============================================
+    // CONFIGURATION
+    // ============================================
     const API_KEY = "QnuHEMMJkmn5ic4UvtN6aIR4wfTO2GgjOzMpoBIJ";
     const BASE_URL = "https://api.si.edu/openaccess/api/v1.0/search";
+
+    // ============================================
+    // STATE MANAGEMENT
+    // - artworksData: Array of all fetched artwork objects
+    // - artworkCounter: Used to generate IDs (BUG: resets on each search!)
+    // - currentSearchTerm: Last search term used
+    // - currentProduct: Currently viewed product on detail page
+    // - searchTimeout: Debounce timer for search input
+    // ============================================
     let artworksData = [];
     let artworkCounter = 0;
     let currentSearchTerm = "";
     let currentProduct = null;
     let searchTimeout = null;
 
-    // Router functionality
+    // ============================================
+    // ROUTING
+    // Hash-based routing for single-page app
+    // - #product/{id} -> Product detail page
+    // - # or empty -> Shop page (product grid)
+    // 
+    // IMPORTANT: Router ignores hash changes when Snipcart
+    // is active to prevent interfering with checkout flow.
+    // ============================================
+    
+    /**
+     * Check if Snipcart cart/checkout is currently active
+     * Used to prevent router from interfering with Snipcart
+     * @returns {boolean} True if Snipcart is open
+     */
+    function isSnipcartActive() {
+      // Method 1: Check Snipcart's internal state
+      if (typeof Snipcart !== 'undefined' && Snipcart.store) {
+        try {
+          const state = Snipcart.store.getState();
+          if (state.cart && state.cart.opened) {
+            console.log('🛒 Snipcart is open (state check)');
+            return true;
+          }
+        } catch (e) {
+          // Snipcart not fully initialized, check DOM instead
+        }
+      }
+      
+      // Method 2: Check for Snipcart's DOM elements (backup)
+      const snipcartModal = document.querySelector('.snipcart-modal__container');
+      const snipcartOverlay = document.querySelector('.snipcart-overlay');
+      const snipcartCart = document.querySelector('.snipcart-cart__content');
+      
+      if (snipcartModal || snipcartOverlay || snipcartCart) {
+        console.log('🛒 Snipcart is open (DOM check)');
+        return true;
+      }
+      
+      return false;
+    }
+
+    /**
+     * Initialize router - attach hash change listener
+     */
     function initRouter() {
       window.addEventListener('hashchange', handleRoute);
       handleRoute(); // Handle initial route
     }
 
+    /**
+     * Handle route changes based on URL hash
+     * Called on: page load, hash change
+     * 
+     * IMPORTANT: Skips processing if Snipcart is active
+     * to prevent closing cart during checkout flow.
+     */
     function handleRoute() {
+      // Don't interfere with Snipcart!
+      if (isSnipcartActive()) {
+        console.log('🛒 Router: Ignoring hash change - Snipcart is active');
+        return;
+      }
+      
       const hash = window.location.hash;
       
       if (hash.startsWith('#product/')) {
@@ -995,6 +1166,10 @@
       }
     }
 
+    /**
+     * Show the shop page (product grid)
+     * Hides product page, clears hash
+     */
     function showShop() {
       document.getElementById('shopPage').classList.remove('hidden');
       document.getElementById('productPage').classList.remove('active');
@@ -1002,6 +1177,10 @@
       window.location.hash = '';
     }
 
+    /**
+     * Show a specific product detail page
+     * @param {string} productId - The artwork ID (e.g., "artwork_0")
+     */
     function showProduct(productId) {
       const artwork = artworksData.find(art => art.id === productId);
       if (!artwork) {
@@ -1024,6 +1203,16 @@
       populateProductPage(artwork);
     }
 
+    // ============================================
+    // PRODUCT PAGE DISPLAY
+    // Functions for rendering product detail page
+    // ============================================
+    
+    /**
+     * Populate the product detail page with artwork data
+     * Resets all options and price display
+     * @param {Object} artwork - The artwork object
+     */
     function populateProductPage(artwork) {
       document.getElementById('mainProductImage').src = artwork.highResImage || artwork.image;
       document.getElementById('mainProductImage').alt = artwork.title;
@@ -1046,7 +1235,7 @@
       const attrs = ['data-item-id', 'data-item-name', 'data-item-price', 'data-item-url', 'data-item-description', 'data-item-image', 'data-item-custom1-name', 'data-item-custom1-value', 'data-item-custom2-name', 'data-item-custom2-value', 'data-item-custom3-name', 'data-item-custom3-value'];
       attrs.forEach(attr => addToCartBtn.removeAttribute(attr));
       
-      // Populate details
+      // Populate details section
       let details = [];
       if (artwork.year_created) details.push(`<p><strong>Date Created:</strong> ${artwork.year_created}</p>`);
       if (artwork.medium) details.push(`<p><strong>Medium:</strong> ${artwork.medium}</p>`);
@@ -1065,6 +1254,23 @@
       document.getElementById('detailsContent').innerHTML = details.join('');
     }
 
+    // ============================================
+    // PRICE & CART INTEGRATION
+    // Calculate price based on options
+    // Set up Snipcart data attributes for cart
+    // ============================================
+    
+    /**
+     * Update price display and configure Snipcart button
+     * Called when size or frame option changes
+     * 
+     * Pricing:
+     * - Standard (11x14): $49.99
+     * - Large (16x20): $79.99
+     * - No frame: +$0
+     * - Black/White frame: +$29.99
+     * - Wood frame: +$49.99
+     */
     function updatePrice() {
       if (!currentProduct) return;
       
@@ -1129,6 +1335,14 @@
       }
     }
 
+    // ============================================
+    // UI HELPERS
+    // Toggle details, lightbox, etc.
+    // ============================================
+    
+    /**
+     * Toggle the item details dropdown
+     */
     function toggleDetails() {
       const content = document.getElementById('detailsContent');
       const arrow = document.getElementById('detailsArrow');
@@ -1142,6 +1356,9 @@
       }
     }
 
+    /**
+     * Open the full-screen image lightbox
+     */
     function openImageLightbox() {
       if (!currentProduct) return;
       
@@ -1154,6 +1371,10 @@
       document.body.style.overflow = 'hidden';
     }
 
+    /**
+     * Close the image lightbox
+     * @param {Event} event - Click event (optional)
+     */
     function closeImageLightbox(event) {
       if (event && event.target !== document.getElementById('imageLightbox') && event.target.className !== 'lightbox-close') {
         return;
@@ -1164,7 +1385,18 @@
       document.body.style.overflow = '';
     }
 
-    // Optimize image URLs for faster loading using Smithsonian IIIF
+    // ============================================
+    // IMAGE URL OPTIMIZATION
+    // Use Smithsonian IIIF for faster loading
+    // ============================================
+    
+    /**
+     * Optimize image URL for faster loading
+     * Adds max size parameter to Smithsonian IIIF URLs
+     * @param {string} imageUrl - Original image URL
+     * @param {number} maxSize - Maximum dimension (default 400)
+     * @returns {string} Optimized URL
+     */
     function optimizeImageUrl(imageUrl, maxSize = 400) {
       if (!imageUrl) return '';
       
@@ -1176,6 +1408,13 @@
       return imageUrl;
     }
 
+    /**
+     * Extract optimized image URL from Smithsonian API response
+     * Searches through various possible locations for image data
+     * @param {Object} descriptive - descriptiveNonRepeating object from API
+     * @param {number} size - Target image size (default 400)
+     * @returns {string|null} Image URL or null if not found
+     */
     function extractOptimizedImage(descriptive, size = 400) {
       if (!descriptive || !descriptive.online_media) return null;
       
@@ -1215,6 +1454,14 @@
       return null;
     }
 
+    // ============================================
+    // SEARCH HELPERS
+    // ============================================
+    
+    /**
+     * Fill search input from artist dropdown selection
+     * Handles "clear" option to reset search
+     */
     function fillSearchFromArtist() {
       const artistSelect = document.getElementById("artistSelect");
       const searchQuery = document.getElementById("searchQuery");
@@ -1231,17 +1478,40 @@
       fetchArtworks();
     }
 
+    /**
+     * Get current search term from input
+     * @returns {string} Search term or "american art" if empty
+     */
     function getSearchTerm() {
       const searchQuery = document.getElementById("searchQuery").value.trim();
       return searchQuery || "american art";
     }
 
+    /**
+     * Extract content from various API response formats
+     * @param {*} data - API response data (array, object, or string)
+     * @returns {string} Extracted content string
+     */
     function extractContent(data) {
       if (!data) return "";
       if (Array.isArray(data)) return data[0]?.content || data[0] || "";
       return data.content || data.toString();
     }
 
+    // ============================================
+    // API / DATA FETCHING
+    // Fetch artwork from Smithsonian Open Access API
+    // ============================================
+    
+    /**
+     * Fetch artworks from Smithsonian API
+     * - Debounced (300ms) to prevent rapid API calls
+     * - Filters by SAAM collection and CC0 license
+     * - Processes results and displays cards
+     * 
+     * BUG: artworkCounter resets to 0 on each search,
+     * creating non-unique product IDs!
+     */
     async function fetchArtworks() {
       // Debounce search input
       if (searchTimeout) {
@@ -1257,9 +1527,9 @@
         const galleryElement = document.getElementById("gallery");
         const statsElement = document.getElementById("stats");
         
-        // Reset
+        // Reset state
         artworksData = [];
-        artworkCounter = 0;
+        artworkCounter = 0;  // BUG: This causes non-unique IDs!
         galleryElement.innerHTML = "";
         statsElement.style.display = "none";
         updateStats();
@@ -1267,6 +1537,7 @@
         statusElement.innerHTML = `<div class="loading"></div>Searching for "${searchTerm}"...`;
         
         try {
+          // Build query: SAAM collection + CC0 license + search term
           let query = `unit_code:SAAM AND media_usage:CC0`;
           
           if (searchTerm && searchTerm !== "american art") {
@@ -1276,7 +1547,7 @@
           const params = new URLSearchParams({
             api_key: API_KEY,
             q: query,
-            rows: Math.min(maxItems * 2, 100),
+            rows: Math.min(maxItems * 2, 100),  // Request extra to account for filtering
             start: 0,
             sort: "relevancy"
           });
@@ -1304,6 +1575,7 @@
           let processedCount = 0;
           let successCount = 0;
           
+          // Process each result
           for (const item of data.response.rows) {
             if (successCount >= maxItems) break;
             
@@ -1313,16 +1585,19 @@
               const indexed = content.indexedStructured || {};
               const freetext = content.freetext || {};
               
+              // Skip items without images
               const imageUrl = extractOptimizedImage(descriptive, 400);
               if (!imageUrl) continue;
               
+              // Extract metadata
               const title = extractContent(descriptive.title) || "Untitled";
               const artist = extractContent(indexed.name || freetext.name) || "Unknown Artist";
               const date = extractContent(indexed.date || freetext.date) || "";
               const medium = extractContent(freetext.physicalDescription) || "Mixed Media";
               
+              // Create artwork object
               const artwork = {
-                id: `artwork_${artworkCounter++}`,
+                id: `artwork_${artworkCounter++}`,  // BUG: Non-unique across searches!
                 title: title,
                 artist: artist,
                 year_created: date,
@@ -1380,6 +1655,15 @@
       }, 300); // 300ms debounce
     }
 
+    // ============================================
+    // RENDERING
+    // Create and display product cards
+    // ============================================
+    
+    /**
+     * Display a single artwork as a product card
+     * @param {Object} artwork - The artwork object to display
+     */
     function displayArtwork(artwork) {
       const galleryElement = document.getElementById("gallery");
       
@@ -1418,6 +1702,9 @@
       galleryElement.appendChild(card);
     }
 
+    /**
+     * Update the stats display with current card count
+     */
     function updateStats() {
       const totalCount = document.getElementById("totalCount");
       const currentDisplayed = document.querySelectorAll(".product-card").length;
@@ -1425,6 +1712,10 @@
       if (totalCount) totalCount.textContent = currentDisplayed;
     }
 
+    // ============================================
+    // EVENT HANDLERS
+    // ============================================
+    
     // Close lightbox with Escape key
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
@@ -1432,7 +1723,16 @@
       }
     });
 
-    // Initialize clean state
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    
+    /**
+     * Initialize app in clean state
+     * - Show shop page
+     * - Hide product page
+     * - Clear hash
+     */
     function initializeCleanState() {
       // Ensure we start on shop page
       document.getElementById('shopPage').classList.remove('hidden');
@@ -1450,7 +1750,12 @@
       console.log('🧹 Page initialized in clean state');
     }
 
-    // Initialize the application with Georgia O'Keeffe as default
+    /**
+     * Main initialization on DOM ready
+     * - Initialize clean state
+     * - Set up router
+     * - Load Georgia O'Keeffe as default
+     */
     document.addEventListener('DOMContentLoaded', function() {
       initializeCleanState();
       initRouter();
@@ -1467,7 +1772,10 @@
       console.log('🔥 Smithsonian store loaded with Georgia O\'Keeffe');
     });
 
-    // Debug Snipcart events
+    // ============================================
+    // SNIPCART EVENT DEBUGGING
+    // Logs all Snipcart events to console
+    // ============================================
     document.addEventListener('snipcart.ready', function() {
       console.log('✅ Snipcart is ready and working!');
       
