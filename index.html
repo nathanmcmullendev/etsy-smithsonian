@@ -1081,13 +1081,11 @@
     // ============================================
     // STATE MANAGEMENT
     // - artworksData: Array of all fetched artwork objects
-    // - artworkCounter: Used to generate IDs (BUG: resets on each search!)
     // - currentSearchTerm: Last search term used
     // - currentProduct: Currently viewed product on detail page
     // - searchTimeout: Debounce timer for search input
     // ============================================
     let artworksData = [];
-    let artworkCounter = 0;
     let currentSearchTerm = "";
     let currentProduct = null;
     let searchTimeout = null;
@@ -1508,9 +1506,7 @@
      * - Debounced (300ms) to prevent rapid API calls
      * - Filters by SAAM collection and CC0 license
      * - Processes results and displays cards
-     * 
-     * BUG: artworkCounter resets to 0 on each search,
-     * creating non-unique product IDs!
+     * - Uses Smithsonian's unique item.id for stable URLs
      */
     async function fetchArtworks() {
       // Debounce search input
@@ -1529,7 +1525,6 @@
         
         // Reset state
         artworksData = [];
-        artworkCounter = 0;  // BUG: This causes non-unique IDs!
         galleryElement.innerHTML = "";
         statsElement.style.display = "none";
         updateStats();
@@ -1596,8 +1591,11 @@
               const medium = extractContent(freetext.physicalDescription) || "Mixed Media";
               
               // Create artwork object
+              // Use Smithsonian's unique item.id for stable, shareable URLs
+              const smithsonianId = item.id || `si_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+              
               const artwork = {
-                id: `artwork_${artworkCounter++}`,  // BUG: Non-unique across searches!
+                id: smithsonianId,  // Unique across all searches
                 title: title,
                 artist: artist,
                 year_created: date,
@@ -1609,7 +1607,7 @@
                 description: extractContent(freetext.notes || freetext.summary) || `Museum quality print of ${title} by ${artist}`,
                 accession_number: descriptive.record_ID,
                 api_url: `https://collections.si.edu/search/detail/edanmdm:${item.id}`,
-                smithsonian_id: item.id || `si_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+                smithsonian_id: smithsonianId,  // Keep for backwards compatibility
                 object_type: extractContent(indexed.object_type) || "Artwork",
                 dimensions: extractContent(freetext.dimensions) || "",
                 credit_line: extractContent(freetext.creditLine) || "",
