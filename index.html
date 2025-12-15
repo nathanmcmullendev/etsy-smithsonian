@@ -830,6 +830,7 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 16px;
+        position: relative;
       }
       
       .store-branding {
@@ -855,35 +856,53 @@
     /* Mobile breakpoint */
     @media (max-width: 768px) {
       .store-header {
-        padding: 16px 0;
+        padding: 12px 0;
+        position: relative;
       }
       
       .header-container {
-        flex-direction: column;
+        display: block;
         text-align: center;
-        gap: 12px;
         padding: 0 16px;
       }
       
+      /* Logo row with cart in corner */
+      .store-branding {
+        padding-right: 70px; /* Make room for cart */
+      }
+      
       .store-logo {
-        font-size: 28px;
+        font-size: 26px;
       }
       
       .store-tagline {
-        font-size: 12px;
+        font-size: 11px;
+        margin-bottom: 12px;
       }
       
+      /* Cart - top right corner */
       .cart-button {
-        position: static;
-        order: 3;
-        margin-top: 4px;
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        padding: 8px 12px;
+        font-size: 13px;
       }
       
+      .cart-count {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+      }
+      
+      /* Search controls - stacked and compact */
       .search-controls {
+        display: flex;
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        padding: 0 8px;
+        padding: 0;
+        margin-top: 0;
       }
       
       .search-bar-wrapper {
@@ -895,53 +914,107 @@
       .search-input {
         padding: 12px 12px 12px 40px;
         font-size: 16px; /* Prevents iOS zoom */
+        border-radius: 24px;
       }
       
+      .search-icon {
+        left: 14px;
+        font-size: 16px;
+      }
+      
+      /* Secondary controls - inline, no labels */
       .secondary-controls {
-        width: 100%;
+        display: flex;
         justify-content: center;
-        flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
       }
       
       .input-group {
+        flex-direction: row;
         align-items: center;
+        gap: 0;
+      }
+      
+      /* Hide labels on mobile - obvious from context */
+      .input-label {
+        display: none;
       }
       
       .artist-select {
-        font-size: 14px;
-        padding: 10px 28px 10px 12px;
+        font-size: 13px;
+        padding: 8px 28px 8px 12px;
+        border-radius: 18px;
       }
       
+      .max-items-input {
+        width: 50px;
+        padding: 8px 6px;
+        font-size: 13px;
+        border-radius: 18px;
+      }
+      
+      /* Status section - tighter */
+      .status-section {
+        padding: 10px 0;
+      }
+      
+      #status {
+        font-size: 12px;
+      }
+      
+      .stats {
+        font-size: 11px;
+      }
+      
+      /* Main content */
       .main-content {
-        padding: 16px;
+        padding: 12px;
       }
       
       /* Product Grid - 2 columns on mobile */
       .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 10px;
+      }
+      
+      .product-card {
+        border-radius: 6px;
       }
       
       .product-image-container {
-        height: 180px;
+        height: 160px;
       }
       
       .product-info {
-        padding: 12px;
+        padding: 10px;
       }
       
       .product-title {
         font-size: 12px;
+        margin-bottom: 2px;
       }
       
       .product-artist {
-        font-size: 11px;
+        font-size: 10px;
+        margin-bottom: 4px;
+      }
+      
+      .product-rating {
+        margin-bottom: 4px;
+      }
+      
+      .stars {
+        font-size: 10px;
+      }
+      
+      .rating-count {
+        font-size: 10px;
       }
       
       .product-pricing {
         flex-wrap: wrap;
         gap: 4px;
+        margin-bottom: 6px;
       }
       
       .current-price {
@@ -949,71 +1022,112 @@
       }
       
       .original-price {
-        font-size: 12px;
+        font-size: 11px;
       }
       
       .discount {
-        font-size: 10px;
+        font-size: 9px;
+        padding: 2px 4px;
       }
       
       .quick-add {
-        padding: 10px 8px;
+        padding: 8px 6px;
         font-size: 11px;
+        margin-top: 4px;
+      }
+      
+      /* Museum badge */
+      .museum-badge {
+        font-size: 8px;
+        padding: 3px 6px;
+      }
+      
+      .favorite-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
       }
       
       /* Product Detail Page */
       .product-detail-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
       }
       
       .main-product-image {
-        height: 300px;
+        height: 280px;
       }
       
       .product-details {
-        padding: 20px;
+        padding: 16px;
       }
       
       .detail-title {
-        font-size: 22px;
+        font-size: 20px;
+      }
+      
+      .detail-artist {
+        font-size: 15px;
       }
       
       .detail-current-price {
-        font-size: 24px;
+        font-size: 22px;
       }
       
-      /* Status section */
-      .status-section {
-        padding: 12px 0;
+      .option-select {
+        padding: 10px 12px;
+        font-size: 14px;
       }
       
-      #status {
-        font-size: 13px;
+      .add-to-cart-btn {
+        padding: 14px;
+        font-size: 15px;
       }
     }
     
     /* Small mobile */
-    @media (max-width: 400px) {
+    @media (max-width: 380px) {
+      .store-logo {
+        font-size: 22px;
+      }
+      
+      .store-branding {
+        padding-right: 60px;
+      }
+      
+      .cart-button {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      
+      .search-input {
+        padding: 10px 10px 10px 36px;
+        font-size: 15px;
+      }
+      
       .products-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
       }
       
       .product-image-container {
-        height: 150px;
+        height: 140px;
       }
       
       .product-info {
-        padding: 10px;
+        padding: 8px;
       }
       
       .product-rating {
         display: none;
       }
       
+      .original-price,
       .discount {
         display: none;
+      }
+      
+      .product-title {
+        -webkit-line-clamp: 1;
       }
     }
     
